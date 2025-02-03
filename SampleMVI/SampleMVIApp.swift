@@ -11,7 +11,14 @@ import SwiftUI
 struct SampleMVIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let viewState = ViewState()
+            ContentView(
+                viewState: viewState,
+                intent: Intent(
+                    viewState: viewState,
+                    dataStore: DataStore()
+                )
+            )
         }
     }
 }

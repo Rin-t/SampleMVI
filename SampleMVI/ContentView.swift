@@ -8,17 +8,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var viewState: ViewState
+    private let intent: Intent
+    
+    init(viewState: ViewState, intent: Intent) {
+        _viewState = .init(wrappedValue: viewState)
+        self.intent = intent
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 12) {
+            Text("\(viewState.number)")
+            
+            Button("get random number") {
+                intent.tappedGenerateNumberButton()
+            }
+            
+            Button("multiple number") {
+                intent.tappedMultipleButton(
+                    number: viewState.number
+                )
+            }
+            
+            Button("reset") {
+                intent.tappedResetButton()
+            }
+            
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    let viewState = ViewState()
+    ContentView(
+        viewState: viewState,
+        intent: Intent(
+            viewState: viewState,
+            dataStore: DataStore()
+        )
+    )
 }
