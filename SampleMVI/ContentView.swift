@@ -18,25 +18,27 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
-            Text("\(viewState.number)")
-            
-            Button("get random number") {
-                intent.tappedGenerateNumberButton()
+        NavigationStack {
+            VStack(spacing: 12) {
+                Text("\(viewState.number)")
+                
+                Button("get random number") {
+                    intent.tappedGenerateNumberButton()
+                }
+                
+                Button("multiple number") {
+                    intent.tappedMultipleButton(
+                        number: viewState.number
+                    )
+                }
+                
+                Button("reset") {
+                    intent.tappedResetButton()
+                }
+                
             }
-            
-            Button("multiple number") {
-                intent.tappedMultipleButton(
-                    number: viewState.number
-                )
-            }
-            
-            Button("reset") {
-                intent.tappedResetButton()
-            }
-            
+            .padding()
         }
-        .padding()
     }
 }
 
