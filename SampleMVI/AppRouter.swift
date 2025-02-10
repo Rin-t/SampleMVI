@@ -17,7 +17,7 @@ struct AppRouter: ViewModifier {
             .navigationDestination(for: RouterDestination.self) { desination in
                 switch desination {
                 case .detailNumber(let number):
-                    EmptyView()
+                    DetailNumberPage(number: number)
                 }
             }
     }
@@ -29,9 +29,10 @@ extension View {
     }
 }
 
+@Observable
 @MainActor
 final class Router {
-    private var paths: [RouterDestination] = []
+    var paths: [RouterDestination] = []
 
     func popToRoot() {
         paths.removeAll()

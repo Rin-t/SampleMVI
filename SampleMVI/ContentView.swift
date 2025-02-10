@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @Environment(Router.self) var router: Router
     @State private var viewState: ViewState
     private let intent: Intent
     
@@ -18,7 +18,9 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        @Bindable var router: Router = router
+        
+        NavigationStack(path: $router.paths) {
             VStack(spacing: 12) {
                 Text("\(viewState.number)")
                 
@@ -35,6 +37,11 @@ struct ContentView: View {
                 Button("reset") {
                     intent.tappedResetButton()
                 }
+                
+                Button("tap to next") {
+                    router.navigateTo(.detailNumber(viewState.number))
+                }
+                .withAppRouter()
                 
             }
             .padding()

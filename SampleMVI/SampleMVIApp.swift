@@ -19,6 +19,7 @@ struct SampleMVIApp: App {
                     dataStore: DataStore()
                 )
             )
+            .environment(Router())
         }
     }
 }
